@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class WebUtil {
 	
-	public static void forwarding(HttpServletRequest request,HttpServletResponse response, String path)throws ServletException, IOException{
+	public static void forwarding(HttpServletRequest request,
+			HttpServletResponse response, String path)
+					throws ServletException, IOException{
 		RequestDispatcher requestDispacher = request.getRequestDispatcher(path);
 		requestDispacher.forward(request, response);
 	}
-	public static void redirect(HttpServletResponse response,String url)throws ServletException, IOException{
+	public static void redirect(HttpServletResponse response,
+			String url)throws ServletException, IOException{
 		response.sendRedirect(url);
 	}
 

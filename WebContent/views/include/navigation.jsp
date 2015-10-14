@@ -3,7 +3,7 @@
 	<div id="navigation">
 			<ul>
 				<li><a href="">김재현</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite/guest">방명록</a></li>
+				<li><a href="/mysite/board">게시판</a></li>
 			</ul>
 		</div>

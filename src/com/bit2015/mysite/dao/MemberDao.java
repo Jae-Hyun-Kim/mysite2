@@ -77,7 +77,6 @@ public class MemberDao {
 			//4. execute sql
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
-				
 				vo = new MemberVo();
 				vo.setNo(rs.getLong(1)); //위에 sql문의 첫번째값 no
 				vo.setName(rs.getString(2)); // sql문의 두번쨰값 name
