@@ -3,7 +3,8 @@
 <%@page import="com.bit2015.mysite.vo.GuestBookVo"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-List<GuestBookVo> list = (List<GuestBookVo>)request.getAttribute("list");
+	List<GuestBookVo> list = (List<GuestBookVo>) request
+			.getAttribute("list");
 %>
 <!doctype html>
 <html>
@@ -72,16 +73,8 @@ List<GuestBookVo> list = (List<GuestBookVo>)request.getAttribute("list");
 				</ul>
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2014</p>
-		</div>
+		<jsp:include page="/views/include/navigation.jsp" flush="false"></jsp:include>
+		<jsp:include page="/views/include/footer.jsp" flush="false"></jsp:include>
 	</div>
 </body>
 </html>

@@ -1,5 +1,10 @@
+<%@page import="com.bit2015.mysite.vo.MemberVo"%>
+<%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+ MemberVo vo = (MemberVo)session.getAttribute("authUser");
+%>
 <html>
 <head>
 <title>mysite</title>
@@ -20,7 +25,7 @@
 		</div>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="/mysite/board">
+				<form class="board-form" method="post" action="/mysite/board?a=insert&mno=<%=vo.getNo()%>">
 					<input type = "hidden" name = "a" value="write">
 					<table class="tbl-ex">
 						<tr>
@@ -33,13 +38,17 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="content">
+								
+								</textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
 						<a href="/mysite/board">취소</a>
+						<%if(vo!=null) {%>
 						<input type="submit" value="등록">
+						<%} %>
 					</div>
 				</form>				
 			</div>

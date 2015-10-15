@@ -1,9 +1,11 @@
+<%@page import="com.bit2015.mysite.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bit2015.mysite.dao.BoardDao"%>
 <%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
  BoardVo vo =  (BoardVo)request.getAttribute("board");
+ MemberVo mvo = (MemberVo)session.getAttribute("authUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +47,9 @@
 				</table>
 				<div class="bottom">
 					<a href="/mysite/board?a=list">글목록</a>
+					<%if(mvo!=null&&mvo.getNo()==vo.getMember_no()){ %>
 					<a href="/mysite/board?a=modify&bno=<%=vo.getNo()%>">글수정</a>
+					<%} %>
 				</div>
 			</div>
 		</div>

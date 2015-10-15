@@ -1,8 +1,10 @@
+<%@page import="com.bit2015.mysite.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bit2015.mysite.dao.BoardDao"%>
 <%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+MemberVo vo = (MemberVo)session.getAttribute("authUser");
 List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -14,16 +16,7 @@ List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
+	<jsp:include page="/views/include/header.jsp"  flush="false"></jsp:include>
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
@@ -49,29 +42,27 @@ List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
 						<td><%=list.get(i).getMember_name()%></td>
 						<td><%=list.get(i).getView_cnt()%></td>
 						<td><%=list.get(i).getReg_date()%></td>
-						<td><a href="" class="del">삭제</a></td>
+						<td>
+						<% if(vo != null && vo.getNo()==list.get(i).getMember_no()){ %>
+						<a href="/mysite/board?a=delete&bno=<%=list.get(i).getNo()%>" class="del">삭제</a>
+						<%}%>
+						</td>
 					</tr>
 				<%
  					}
  				%>		
 				</table>
 			
-				
+					<% if(vo != null){ %>
 					<div class="bottom">
 					<a href="/mysite/board?a=write" id="new-book">글쓰기</a>
-				</div>				
+				</div>
+				<%}%>				
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">김재현</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2014 </p>
-		</div>
+	
+	<jsp:include page="/views/include/navigation.jsp" flush="false"></jsp:include>
+	<jsp:include page="/views/include/footer.jsp" flush="false"></jsp:include>
 	</div>
 </body>
 </html>
