@@ -1,12 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@page import="com.bit2015.mysite.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bit2015.mysite.dao.BoardDao"%>
 <%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
+<%-- <%
 MemberVo vo = (MemberVo)session.getAttribute("authUser");
 List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
-%>
+%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,31 +37,35 @@ List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>				
-				<%
-					for (int i = 0; i < list.size(); i++) {
-				%>
+		
+				<c:forEach items='${list}' var='vo'>
 					<tr>
-						<td><%=list.get(i).getNo()%></td>
-						<td><a href="/mysite/board?a=view&bno=<%=list.get(i).getNo()%>"><%=list.get(i).getTitle()%></a></td>
-						<td><%=list.get(i).getMember_name()%></td>
-						<td><%=list.get(i).getView_cnt()%></td>
-						<td><%=list.get(i).getReg_date()%></td>
+						<td>${vo.no}</td>
+						<td><a href="/mysite/board?a=view&bno=${vo.no }">${vo.title}</a></td>
+						<td>${vo.member_name}</td>
+						<td>${vo.view_cnt}</td>
+						<td>${vo.reg_date}</td>
 						<td>
-						<% if(vo != null && vo.getNo()==list.get(i).getMember_no()){ %>
-						<a href="/mysite/board?a=delete&bno=<%=list.get(i).getNo()%>" class="del">삭제</a>
-						<%}%>
+						
+					
+						<c:if test='${not empty authUser && authUser.no == vo.member_no}'> 
+						<%-- <% if(vo != null && vo.getNo()==list.get(i).getMember_no()){ %> --%>
+						<a href="/mysite/board?a=delete&bno=${vo.no}<%-- <%=list.get(i).getNo()%> --%>" class="del">삭제</a>
+						<%-- <%}%> --%>
+						</c:if>
 						</td>
 					</tr>
-				<%
- 					}
- 				%>		
+			
+ 				</c:forEach>	
 				</table>
 			
-					<% if(vo != null){ %>
+					<%-- <% if(vo != null){ %> --%>
+					<c:if test='${not empty authUser}'>
 					<div class="bottom">
 					<a href="/mysite/board?a=write" id="new-book">글쓰기</a>
 				</div>
-				<%}%>				
+				<%-- <%}%>	 --%>
+				</c:if>			
 			</div>
 		</div>
 	

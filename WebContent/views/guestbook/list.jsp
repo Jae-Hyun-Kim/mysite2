@@ -1,11 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@page import="java.util.List"%>
 <%@page import="com.bit2015.mysite.dao.GuestBookDao"%>
 <%@page import="com.bit2015.mysite.vo.GuestBookVo"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%
+<%-- <%
 	List<GuestBookVo> list = (List<GuestBookVo>) request
 			.getAttribute("list");
-%>
+%> --%>
 <!doctype html>
 <html>
 <head>
@@ -16,27 +19,14 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">로그인</a>
-				<li>
-				<li><a href="">회원가입</a>
-				<li>
-				<li><a href="">회원정보수정</a>
-				<li>
-				<li><a href="">로그아웃</a>
-				<li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
+	<c:import url="/views/include/header.jsp"></c:import>
 		<div id="content">
 			<div id="guestbook">
 				<form action="/mysite/guest" method="post">
 					<input type="hidden" name="a" value="insert">
 					<table>
 						<tr>
-							<td>이름</td>
+							<td>바보</td>
 							<td><input type="text" name="name"></td>
 							<td>비밀번호</td>
 							<td><input type="password" name="pass"></td>
@@ -51,30 +41,38 @@
 				</form>
 				<ul>
 					<li>
-						<%
+						<%-- <%
 							for (int i = 0; i < list.size(); i++) {
-						%>
+						%> --%>
+					<c:forEach items='${list}' var='vo' varStatus='status'>
 						<table width=510 border=1>
 							<tr>
-								<td>[<%=i + 1%>]
+								<%-- <%=i + 1%> --%>
+								<td>${status.index+1}
 								</td>
-								<td><%=list.get(i).getName()%></td>
-								<td><%=list.get(i).getDate()%></td>
+								<%-- <%=list.get(i).getName()%> --%>
+								<td>${vo.name}</td>
+								<%-- <%=list.get(i).getDate()%> --%>
+								<td>${vo.date}</td>
 								<td><a
-									href="/mysite/guest?a=deleteform&no=<%=list.get(i).getNo()%>">삭제</a></td>
+									href="/mysite/guest?a=deleteform&no=${vo.no}">삭제</a></td>
+														<%-- <%=list.get(i).getNo()%> --%>
 							</tr>
 							<tr>
-								<td colspan=4><%=list.get(i).getMessage()%></td>
+								<td colspan=4>${vo.message}</td>
+								<%-- <%=list.get(i).getMessage()%> --%>
 							</tr>
-						</table> <%
+						</table><%--  <%
  	}
- %> <br>
+ %> --%> 
+ 					</c:forEach>
+ 						<br>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<jsp:include page="/views/include/navigation.jsp" flush="false"></jsp:include>
-		<jsp:include page="/views/include/footer.jsp" flush="false"></jsp:include>
+		<c:import url="/views/include/navigation.jsp" ></c:import>
+		<c:import url="/views/include/footer.jsp" ></c:import>
 	</div>
 </body>
 </html>

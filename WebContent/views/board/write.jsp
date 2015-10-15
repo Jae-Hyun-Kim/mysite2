@@ -1,10 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@page import="com.bit2015.mysite.vo.MemberVo"%>
 <%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%
+<%-- <%
  MemberVo vo = (MemberVo)session.getAttribute("authUser");
-%>
+%> --%>
 <html>
 <head>
 <title>mysite</title>
@@ -25,8 +28,8 @@
 		</div>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="/mysite/board?a=insert&mno=<%=vo.getNo()%>">
-					<input type = "hidden" name = "a" value="write">
+				<form class="board-form" method="post" action="/mysite/board?a=insert&mno=${authUser.no}">
+					<input type = "hidden" name = "a" value="write">		<%-- <%=vo.getNo()%> --%>
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -46,23 +49,19 @@
 					</table>
 					<div class="bottom">
 						<a href="/mysite/board">취소</a>
-						<%if(vo!=null) {%>
+						<%-- <%if(vo!=null) {%> --%>
+						 <c:if test='${not empty authUser}'> 
 						<input type="submit" value="등록">
-						<%} %>
+						</c:if>
+						<%-- <%} %> --%>
 					</div>
 				</form>				
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2014 </p>
-		</div>
+	
+	<jsp:include page="/views/include/navigation.jsp" flush="false"></jsp:include>
+	<jsp:include page="/views/include/footer.jsp" flush="false"></jsp:include>
+
 	</div>
 </body>
 </html>

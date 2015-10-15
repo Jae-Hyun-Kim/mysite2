@@ -1,12 +1,15 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@page import="com.bit2015.mysite.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bit2015.mysite.dao.BoardDao"%>
 <%@page import="com.bit2015.mysite.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
+<%-- <%
  BoardVo vo =  (BoardVo)request.getAttribute("board");
  MemberVo mvo = (MemberVo)session.getAttribute("authUser");
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,35 +37,31 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td><%= vo.getTitle()%></td>
+						<td>${board.title}</td>
+						<%-- <%= vo.getTitle()%> --%>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								<%= vo.getContent()%>
+								<%-- <%= vo.getContent()%> --%>
+								${board.content}
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
 					<a href="/mysite/board?a=list">글목록</a>
-					<%if(mvo!=null&&mvo.getNo()==vo.getMember_no()){ %>
-					<a href="/mysite/board?a=modify&bno=<%=vo.getNo()%>">글수정</a>
-					<%} %>
+					<%-- <%if(mvo!=null&&mvo.getNo()==vo.getMember_no()){ %> --%>
+					<c:if test='${not empty authUser && authUser.no == board.member_no}'> 
+					<a href="/mysite/board?a=modify&bno=${board.no}">글수정</a>
+					<%-- <%} %> --%>					<%-- <%=vo.getNo()%> --%>
+					</c:if>
 				</div>
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2014 </p>
-		</div>
+	<c:import url="/views/include/navigation.jsp"></c:import>
+	<c:import url="/views/include/footer.jsp" ></c:import>
 	</div>
 </body>
 </html>

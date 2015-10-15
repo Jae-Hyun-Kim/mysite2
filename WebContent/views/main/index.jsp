@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
@@ -8,11 +11,11 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="/views/include/header.jsp"  flush="false"></jsp:include>
+		<c:import url="/views/include/header.jsp"></c:import>
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/c12.12.155.155/923435_640327239315552_1584643451_n.jpg?oh=a06148a32cfedc106b07da787095f596&oe=544C85EF&__gda__=1413520834_d2143b0d0fffb85fa6b1ab9116643c38">
+					<img id="profile" src="http://imagesearch.naver.com/search.naver?sm=ext&viewloc=1&where=idetail&rev=31&query=%EB%8F%84%EB%81%BC&section=image&res_fr=0&res_to=0&ie=utf8&face=0&color=0&ccl=0&aq=0&spq=3&nx_search_query=%EB%8F%84%EB%81%BC&nx_and_query=&nx_sub_query=&nx_search_hlquery=&nx_search_fasquery=&datetype=0&startdate=0&enddate=0&start=7&img_id=dic1483196%7C1133968_1">
 					<h2>안녕하세요. mysite에 오신 것을 환영합니다.</h2>
 					<p>
 						이 사이트는  웹 프로그램밍 실습과제 예제 사이트입니다.<br>
@@ -23,8 +26,8 @@
 				</div>
 			</div>
 		</div>
-	<jsp:include page="/views/include/navigation.jsp" flush="false"></jsp:include>
-	<jsp:include page="/views/include/footer.jsp" flush="false"></jsp:include>
+	<c:import url="/views/include/navigation.jsp"></c:import>
+	<c:import url="/views/include/footer.jsp" ></c:import>
 	</div>
 </body>
 </html>
