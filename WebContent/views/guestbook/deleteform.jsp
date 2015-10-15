@@ -25,7 +25,7 @@
 					<input type="password" name="password">
 					<input type="submit" value="확인">
 				</form>
-				<a href="">방명록 리스트</a>
+				<a href="/mysite/guest">방명록 리스트</a>
 			</div>
 		</div>
 		<c:import url="/views/include/navigation.jsp" ></c:import>
