@@ -41,7 +41,7 @@ List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
 				<c:forEach items='${list}' var='vo'>
 					<tr>
 						<td>${vo.no}</td>
-						<td><a href="/mysite/board?a=view&bno=${vo.no }">${vo.title}</a></td>
+						<td><a href="/mysite/board?a=view&bno=${vo.no}">${vo.title}</a></td>
 						<td>${vo.member_name}</td>
 						<td>${vo.view_cnt}</td>
 						<td>${vo.reg_date}</td>
